@@ -43,7 +43,8 @@
         @stack('modals')
 
         @livewireScripts
-
+        {{-- font awesome --}}
+        <script src="https://kit.fontawesome.com/160daa7df6.js" crossorigin="anonymous"></script>
         <script>
             $(function(){
                 $('#address').on('keyup', function() {

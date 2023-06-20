@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Place;
+use App\Models\Review;
 use Illuminate\Http\Request;
-use App\Traits\RateableTrait;
 
-class placeController extends Controller
+class reviewController extends Controller
 {
-    use RateableTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $places = Place::orderBy('view_count', 'desc')->take(3)->get();
-
-        return view('welcome', compact('places'));
+        //
     }
 
     /**
@@ -32,24 +28,19 @@ class placeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->user()->reviews()->wherePlace_id($request->place_id)->exists()) {
+            return redirect(url()->previous() . '#review-div')->with('fail', 'لقد قييمت المكان من قبل');
+        }
+        $review = Review::create($request->all()+ ['user_id' => auth()->id()]);
+        return redirect(url()->previous() . '#review-div')->with('success', 'تم إضافة التقييم بنجاح');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Place $place)
+    public function show(string $id)
     {
-        $place = $place::withCount('reviews')->with('reviews.user')->find($place->id);
-
-        $avg = $this->averageRating($place);
-        $total = $avg['total'];
-        $service_rating = $avg['service_rating'];
-        $quality_rating = $avg['quality_rating'];
-        $cleanliness_rating = $avg['cleanliness_rating'];
-        $pricing_rating = $avg['pricing_rating'];
-
-        return view('details', compact('place', 'total', 'service_rating', 'quality_rating', 'cleanliness_rating', 'pricing_rating'));
+        //
     }
 
     /**
