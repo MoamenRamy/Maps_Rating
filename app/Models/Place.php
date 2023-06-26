@@ -37,5 +37,10 @@ class Place extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks');
+    }
 }
 

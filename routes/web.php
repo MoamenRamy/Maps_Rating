@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\contactController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\placeController;
 use App\Http\Controllers\reviewController;
 use App\Http\Controllers\searchController;
@@ -24,15 +26,23 @@ Route::get('/', function () {
 Route::get('/search', [searchController::class, 'autoComplete'])->name('auto-complete');
 Route::post('/search', [searchController::class, 'show'])->name('search');
 
+Route::get('bookmark/{place_id}', [BookmarkController::class, 'bookmark'])->name('bookmark');
+
+Route::get('bookmarks', [BookmarkController::class, 'getByUser'])->name('bookmarks');
+
 Route::get('/{category:slug}', [categoryController::class, 'show'])->name('category.show');
 
 Route::resource('/report', contactController::class, ['only' => ['create', 'store']]);
+
+Route::get('/place/create', [placeController::class, 'create'])->name('place.create');
 
 Route::get('/', [placeController::class, 'index'])->name('home');
 
 Route::get('/{place}/{slug}', [placeController::class, 'show'])->name('place.show');
 
 Route::post('review', [reviewController::class, 'store'])->name('review.store');
+
+Route::post('like', [LikeController::class, 'store'])->name('like.store');
 
 
 Route::middleware([

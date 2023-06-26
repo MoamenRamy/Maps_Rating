@@ -35,8 +35,8 @@
                 <hr/>
                 <div class="p-3">
                 @auth
-                    <a href="#" class="border border-teal-500 text-xs text-teal-500 hover:bg-teal-500 hover:text-gray-100 rounded ml-3 p-1">
-                        {{-- <span class=""><i class="fa {{ Auth::user()->alreadyBookmarked($place->id) ? 'fa-bookmark' : 'fa-bookmark-o' }} fa-lg"></i></span> علامة مرجعية --}}
+                    <a href="{{route('bookmark', $place->id)}}" class="border border-teal-500 text-xs text-teal-500 hover:bg-teal-500 hover:text-gray-100 rounded ml-3 p-1">
+                        <span class=""><i class="fa {{ Auth::user()->alreadyBookmarked($place->id) ? 'fa-bookmark' : 'fa-bookmark-o' }} fa-lg"></i></span> علامة مرجعية
                     </a>
                     <a href="{{route('report.create')}}" class="border border-red-500 text-xs text-red-500 hover:bg-red-500 hover:text-gray-200 rounded p-1">
                         <span class=""><i class="fa fa-warning"></i></span>إبلاغ موقع مكرر
@@ -133,14 +133,14 @@
                                 <div class="review-block-description ">{{ $review->review }}</div>
 
                                 <div class="mt-3">
-                                    {{-- @auth
+                                    @auth
                                     <button id="like" type="button" data-id="{{$review->id}}" class="border rounded p-1 text-xs like">
                                         {!! Auth::user()->alreadyliked($review->id) ? '<i class="fa fa-thumbs-down"></i><small> إلغاء الإعجاب </small>' : '<i class="fa fa-thumbs-up"></i><small> أعجبني </small>' !!}
                                         <span>{{ $review->likes_count }}</span>
                                     </button>
                                     @else
                                         <span class="border rounded text-xs p-1"><i class="fa fa-thumbs-up"></i> {{ $review->likes_count }}</span>
-                                    @endauth --}}
+                                    @endauth
                                 </div>
                             </div>
                         </div>
@@ -209,9 +209,9 @@
                         <div class="form-group">
                             <textarea class="border w-full" name="review" id="review" cols="30" rows="9"></textarea>
                         </div>
-                        {{-- @error('review')
+                        @error('review')
                             <x-alert color="red" message="{{ $message }}" />
-                        @enderror --}}
+                        @enderror
                         <input class="form-control" name="place_id" id="place_id" type="hidden" value="{{ $place->id }}">
                         <button type="submit" class="mt-3 bg-blue-600 text-gray-200 rounded hover:bg-blue-500 px-4 py-2 focus:outline-none">إرسال</button>
                     </div>
@@ -221,7 +221,7 @@
     </div>
 </x-app-layout>
 
-{{--
+
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" ></script>
 <script type="text/javascript">
     $(function(){
@@ -269,7 +269,7 @@
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
     L.marker([latitude, longitude]).bindPopup($('#name').val()).addTo(map).openPopup();
 </script>
- --}}
+
 
 
 

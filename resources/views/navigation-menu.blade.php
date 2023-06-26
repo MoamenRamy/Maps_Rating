@@ -25,7 +25,11 @@
             @endguest
 
             @auth
-
+            <div class="flex" style="width:70%; ">
+                <x-nav-link class="text-slate-50" href="{{ route('place.create') }}">
+                    {{ __('إنشاء موقع') }}
+                </x-nav-link>
+            </div>
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
@@ -105,6 +109,10 @@
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
                             </div>
+
+                            <x-dropdown-link href="{{ route('bookmarks') }}">
+                                {{ __('الاشارات المرجعية') }}
+                            </x-dropdown-link>
 
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}

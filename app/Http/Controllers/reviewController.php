@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewFormRequest;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class reviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReviewFormRequest $request)
     {
         if ($request->user()->reviews()->wherePlace_id($request->place_id)->exists()) {
             return redirect(url()->previous() . '#review-div')->with('fail', 'لقد قييمت المكان من قبل');

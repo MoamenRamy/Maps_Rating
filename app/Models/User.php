@@ -58,8 +58,29 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Review::class, 'likes');
+    }
+
+    public function alreadyliked($review)
+    {
+        return $this->likes()->whereReview_id($review)->exists();
+    }
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(Place::class, 'bookmarks');
+    }
+
+    public function alreadyBookmarked($place)
+    {
+        return $this->bookmarks()->wherePlace_id($place)->exists();
     }
 }

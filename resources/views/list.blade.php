@@ -21,7 +21,9 @@
                 <div class="flex-auto p-6">
                     <div class="flex flex-wrap">
                         <h1 class="flex-auto text-xl font-semibold">
-                        {{ $place->name }}
+                            <a href="{{route('place.show', [$place->id, $place->slug])}}">
+                                {{ $place->name }}
+                            </a>
                         </h1>
                     </div>
                     <div class="flex space-x-3 mb-4 text-sm font-medium mt-5">
